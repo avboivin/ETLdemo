@@ -1,0 +1,4 @@
+NAME                STATE     TELEPHONE      CLIENTID  BIRTHDATE   REPID 
+Fred                WA        418-444-4444   5         1990-10-23  466F  
+Rob                 CA        319-419-1234   6         1981-05-02  123A  
+Christina           IL        219-532-5432   7         1970-12-24  BBBBB 

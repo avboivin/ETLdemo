@@ -1,0 +1,6 @@
+NAME                CATEGORY  PRICE     PRODUCTID 
+Phone               OFFICE    850.99    1         
+Computer            OFFICE    2500.00   2         
+Keyboard            OFFICE    89        4         
+Mug                 OFFICE    6.95      3         
+Car                 NOT_OFFICE20000     5         
