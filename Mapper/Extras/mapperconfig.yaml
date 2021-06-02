@@ -1,0 +1,133 @@
+configs:
+  databasename: example
+  description: A YASQL database example
+  filetype: flat
+  workdirectory: "C:/code/Mapper/Mapper/Extras/fixed_width_files"
+  delimitertypes: "offset"
+
+definitions:
+  boolean: tinyint(1) default 0
+  int: integer
+  money: real
+  pk: INTEGER primary key AUTOINCREMENT
+  string: nvarchar(200)
+  ai: INTEGER AUTOINCREMENT
+  fk: integer not null
+
+tables:
+  - tablename: "representatives"
+    filename: "representatives_2021.txt"
+    skip_header: true
+    columns:
+      - name: name
+        type: string
+        offset: 0
+        length: 20
+      - name: state
+        type: string
+        offset: 20
+        length: 10
+      - name: phone
+        type: string
+        offset: 30
+        length: 14
+      - name: telephone
+        type: string
+        offset: 30
+        length: 14      
+      - name: repnumber
+        type: nvarchar(20) primary key
+        offset: 44
+        length: 10
+  - tablename: "clients"
+    filename: "clients_2021.txt"
+    skip_header: true
+    columns:
+      - name: clientid
+        type: pk
+        offset: 45
+        length: 10
+      - name: name
+        type: string
+        offset: 0
+        length: 20
+      - name: state
+        type: string
+        offset: 20
+        length: 10
+      - name: telephone
+        type: string
+        offset: 30
+        length: 15      
+      - name: birthdate
+        type: string
+        offset: 55
+        length: 11
+      - name: REPID
+        type: string
+        references: representatives.repnumber
+        offset: 67
+        length: 6
+  - tablename: "products"
+    filename: "products_2021.txt"
+    skip_header: true
+    columns:
+      - name: productid
+        type: pk
+        offset: 40
+        length: 10
+      - name: name
+        type: string
+        offset: 0
+        length: 20
+      - name: category
+        type: string
+        offset: 20
+        length: 10
+      - name: price
+        type: money
+        offset: 30
+        length: 10
+  - tablename: "orders"
+    filename: "orders_2021.txt"
+    skip_header: true
+    columns:
+      - name: clientid
+        type: fk
+        references: clients.clientid
+        offset: 0
+        length: 9
+      - name: orderid
+        type: pk
+        offset: 9
+        length: 8
+      - name: total
+        type: money
+        offset: 17
+        length: 15
+      - name: timestamp
+        type: string
+        offset: 32
+        length: 21
+  - tablename: "ordersproducts"
+    filename: "ordersproducts_2021.txt"
+    skip_header: true
+    columns:
+      - name: orderid
+        type: fk
+        references: orders.orderid
+        offset: 0
+        length: 10
+      - name: itemid
+        type: fk
+        references: products.productid
+        offset: 10
+        length: 9
+      - name: qty
+        type: int
+        offset: 19
+        length: 6
+      - name: pricepaid
+        type: money
+        offset: 25
+        length: 10
